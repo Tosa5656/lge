@@ -5,6 +5,7 @@
 #include "../../../libs/glad/include/glad/gl.h"
 #include "../../../libs/glfw/include/GLFW/glfw3.h"
 #include "../Utils/Vectors.h"
+#include "../Utils/Input.h"
 
 using namespace lmt;
 
@@ -34,6 +35,7 @@ public:
     std::string GetTitle();
     Vector2 GetSize();
     Vector2 GetPosition();
+    InputManager* GetInput();
 private:
     void Init();
     void Cleanup();
@@ -42,6 +44,7 @@ private:
     std::string window_title = "";
     Vector2 window_size = Vector2(0, 0);;
     Vector2 window_position = Vector2(0, 0);
+    InputManager window_input;
 
     bool is_inited = false;
 };

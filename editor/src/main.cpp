@@ -13,6 +13,9 @@ int main()
     while(wm.IsRunning())
     {
         wm.RenderAll();
+
+        if(window->GetInput()->IsKeyPressed(GLFW_KEY_W))
+            window->SetTitle("test");
     }
 
     return 0;

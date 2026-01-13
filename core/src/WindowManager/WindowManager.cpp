@@ -39,6 +39,8 @@ void Window::Init()
 
     glfwMakeContextCurrent(gl_window);
 
+    window_input.SetKeyCallback(gl_window);
+
     if(!gl_inited)
     {
         int version = gladLoadGL(glfwGetProcAddress);
@@ -82,6 +84,7 @@ GLFWwindow* Window::GetWindow() { return gl_window; }
 std::string Window::GetTitle() { return window_title; }
 Vector2 Window::GetSize() { return window_size; }
 Vector2 Window::GetPosition() { return window_position; }
+InputManager* Window::GetInput() { return &window_input; }
 
 // ============================WindowManager============================
 WindowManager::WindowManager()

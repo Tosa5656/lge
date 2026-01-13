@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "../include/WindowManager/WindowManager.h"
-#include "../include/Utils/Vectors.h"
+#include "../../core/include/WindowManager/WindowManager.h"
+#include "../../core/include/Utils/Vectors.h"
 
 int main()
 {

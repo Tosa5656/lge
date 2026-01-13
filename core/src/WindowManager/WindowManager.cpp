@@ -74,6 +74,15 @@ bool Window::RenderFrame()
     return true;
 }
 
+void Window::SetTitle(std::string title) { glfwSetWindowTitle(gl_window, title.c_str()); }
+void Window::SetSize(Vector2 size) { glfwSetWindowSize(gl_window, size.x, size.y); }
+void Window::SetPosition(Vector2 position) { glfwSetWindowPos(gl_window, position.x, position.y); }
+
+GLFWwindow* Window::GetWindow() { return gl_window; }
+std::string Window::GetTitle() { return window_title; }
+Vector2 Window::GetSize() { return window_size; }
+Vector2 Window::GetPosition() { return window_position; }
+
 // ============================WindowManager============================
 WindowManager::WindowManager()
 {

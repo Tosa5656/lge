@@ -1,5 +1,5 @@
 CC=g++
-CCFLAGS=-std=c++17 -Wall -Wextra -O2
+CCFLAGS=-std=c++20 -Wall -Wextra -O2
 GL_INCLUDE_FLAGS=-Iglad/include -Iglfw/include
 
 all: lge

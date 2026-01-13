@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+#include "../../../libs/glad/include/glad/gl.h"
+#include "../../../libs/glfw/include/GLFW/glfw3.h"
+#include "../Utils/Vectors.h"
+
+using namespace lmt;
+
+inline bool gl_inited = false;
+
+class Window
+{
+public:
+    Window();
+    Window(std::string title, int width, int height, int x = 0, int y = 0);
+    Window(std::string title, Vector2 size = Vector2(800, 600), Vector2 position = Vector2(0, 0));
+
+    ~Window();
+
+    void Close() { glfwSetWindowShouldClose(gl_window, GLFW_TRUE); }
+    bool RenderFrame();
+    bool ShouldClose() const { return glfwWindowShouldClose(gl_window); }
+    bool IsValid() const { return gl_window != nullptr; }
+private:
+    void Init();
+    void Cleanup();
+
+    GLFWwindow* gl_window = nullptr;
+    std::string window_title = "";
+    Vector2 window_size = Vector2(0, 0);;
+    Vector2 window_position = Vector2(0, 0);
+
+    bool is_inited = false;
+};
+
+class WindowManager
+{
+public:
+    WindowManager();
+    ~WindowManager();
+
+    void AddWindow(Window* window);
+    Window* GetWindow(int index);
+
+    void RenderAll();
+
+    bool IsRunning() { return is_running; }
+private:
+    bool is_running = false;
+    std::vector<Window*> windows;
+};

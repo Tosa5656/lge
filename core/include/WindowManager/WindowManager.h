@@ -19,10 +19,21 @@ public:
 
     ~Window();
 
-    void Close() { glfwSetWindowShouldClose(gl_window, GLFW_TRUE); }
     bool RenderFrame();
+
+    void Close() { glfwSetWindowShouldClose(gl_window, GLFW_TRUE); }
+
     bool ShouldClose() const { return glfwWindowShouldClose(gl_window); }
     bool IsValid() const { return gl_window != nullptr; }
+
+    void SetTitle(std::string title);
+    void SetSize(Vector2 size);
+    void SetPosition(Vector2 position);
+
+    GLFWwindow* GetWindow();
+    std::string GetTitle();
+    Vector2 GetSize();
+    Vector2 GetPosition();
 private:
     void Init();
     void Cleanup();

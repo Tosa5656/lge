@@ -4,9 +4,9 @@ GL_INCLUDE_FLAGS=-Iglad/include -Iglfw/include
 
 all: lge
 
-lge: libglad libglfw editor.o core-windowmanager.o core-input.o
+lge: libglad libglfw editor.o core-windowmanager.o core-input.o core-filesystemmanager.o
 	@mkdir -p bin
-	$(CC) obj/editor.o obj/core-windowmanager.o obj/core-input.o obj/glad.o glfw-build/src/libglfw3.a -o bin/lge -ldl -lm
+	$(CC) obj/editor.o obj/core-windowmanager.o obj/core-input.o obj/core-filesystemmanager.o obj/glad.o glfw-build/src/libglfw3.a -o bin/lge -ldl -lm
 
 editor.o:
 	$(CC) $(CCFLAGS) $(GL_INCLUDE_FLAGS) -c editor/src/main.cpp -o obj/editor.o
@@ -16,6 +16,9 @@ core-windowmanager.o:
 
 core-input.o:
 	$(CC) $(CCFLAGS) $(GL_INCLUDE_FLAGS) -c core/src/Utils/Input.cpp -o obj/core-input.o
+
+core-filesystemmanager.o:
+	$(CC) $(CCFLAGS) -c core/src/Utils/FileSystemManager.cpp -o obj/core-filesystemmanager.o
 
 libglad:
 	@mkdir -p obj

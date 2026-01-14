@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <functional>
 
 #include "../../../libs/glad/include/glad/gl.h"
 #include "../../../libs/glfw/include/GLFW/glfw3.h"
@@ -15,8 +16,8 @@ class Window
 {
 public:
     Window();
-    Window(std::string title, int width, int height, int x = 0, int y = 0);
-    Window(std::string title, Vector2 size = Vector2(800, 600), Vector2 position = Vector2(0, 0));
+    Window(std::string title, int width, int height, int x, int y, std::function<void(Window*)> update, std::function<void(Window*)> start, std::function<void(Window*)> awake);
+    Window(std::string title, Vector2 size, Vector2 position, std::function<void(Window*)> update, std::function<void(Window*)> start, std::function<void(Window*)> awake);
 
     ~Window();
 
@@ -47,6 +48,10 @@ private:
     InputManager window_input;
 
     bool is_inited = false;
+
+    std::function<void(Window*)> windowAwake;
+    std::function<void(Window*)> windowStart;
+    std::function<void(Window*)> windowUpdate;
 };
 
 class WindowManager

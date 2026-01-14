@@ -10,20 +10,28 @@ Window::~Window()
     glfwDestroyWindow(gl_window);
 }
 
-Window::Window(std::string title, int width, int height, int x, int y)
+Window::Window(std::string title, int width, int height, int x, int y, std::function<void(Window*)> update, std::function<void(Window*)> start, std::function<void(Window*)> awake)
 {
     window_title = title;
     window_size = Vector2(width, height);
     window_position = Vector2(x, y);
 
+    windowUpdate = update;
+    windowStart = start;
+    windowAwake = awake;
+
     Init();
 }
 
-Window::Window(std::string title, Vector2 size, Vector2 position)
+Window::Window(std::string title, Vector2 size, Vector2 position, std::function<void(Window*)> update, std::function<void(Window*)> start, std::function<void(Window*)> awake)
 {
     window_title = title;
     window_size = size;
     window_position = position;
+
+    windowUpdate = update;
+    windowStart = start;
+    windowAwake = awake;
 
     Init();
 }
@@ -39,6 +47,8 @@ void Window::Init()
 
     glfwMakeContextCurrent(gl_window);
 
+    windowAwake(this);
+
     window_input.SetKeyCallback(gl_window);
 
     if(!gl_inited)
@@ -50,6 +60,9 @@ void Window::Init()
             return;
         }
     }
+
+    windowStart(this);
+
     glfwMakeContextCurrent(NULL);
 }
 
@@ -66,6 +79,9 @@ bool Window::RenderFrame()
 {
     if (!gl_window || glfwWindowShouldClose(gl_window)) 
         return false;
+    
+    windowUpdate(this);
+    window_input.Update();
     
     glfwMakeContextCurrent(gl_window);
     

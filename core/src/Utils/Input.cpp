@@ -28,18 +28,34 @@ void InputManager::StaticKeyCallback(GLFWwindow* window, int key, int scancode, 
 
 void InputManager::KeyCallback(int key, int scancode, int action, int mods)
 {
+    Update();
+    
     if(action == GLFW_PRESS)
     {
         keyStates[key] = true;
         keyPressedOnFrame[key] = true;
-        keyReleasedOnFrame[key] = false;
     }
     else if(action == GLFW_RELEASE)
     {
         keyStates[key] = false;
-        keyPressedOnFrame[key] = false;
         keyReleasedOnFrame[key] = true;
     }
+}
+
+void InputManager::Update()
+{
+    previousKeyStates = keyStates;
+
+    keyPressedOnFrame.clear();
+    keyReleasedOnFrame.clear();
+}
+
+bool InputManager::IsKeyDown(int key)
+{
+    if(keyStates[key] && keyPressedOnFrame[key] && previousKeyStates[key] != true)
+        return true;
+    else
+        return false;
 }
 
 bool InputManager::IsKeyPressed(int key)

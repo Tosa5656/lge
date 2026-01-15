@@ -2,6 +2,7 @@
 
 #include "../../../libs/glad/include/glad/gl.h"
 #include "../../../libs/glfw/include/GLFW/glfw3.h"
+#include "ShaderManager.h"
 
 class RenderManager
 {

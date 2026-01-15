@@ -7,6 +7,7 @@
 #include "../../../libs/glfw/include/GLFW/glfw3.h"
 #include "../Utils/Vectors.h"
 #include "../Utils/Input.h"
+#include "../Render/RenderManager.h"
 
 using namespace lmt;
 
@@ -46,6 +47,7 @@ private:
     Vector2 window_size = Vector2(0, 0);;
     Vector2 window_position = Vector2(0, 0);
     InputManager window_input;
+    RenderManager window_render;
 
     bool is_inited = false;
 

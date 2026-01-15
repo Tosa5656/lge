@@ -28,6 +28,9 @@ libglfw:
 	@cmake libs/glfw -B glfw-build
 	@cmake --build glfw-build
 
+install-resources: lge
+	@cp -r resources bin/
+
 clean:
 	@rm -rf bin obj
 	@rm -rf glfw-build

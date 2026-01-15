@@ -7,6 +7,8 @@ Window::Window()
 
 Window::~Window()
 {
+    window_render.Cleanup();
+
     glfwDestroyWindow(gl_window);
 }
 
@@ -56,9 +58,12 @@ void Window::Init()
         int version = gladLoadGL(glfwGetProcAddress);
         if (version == 0)
         {
-            printf("Failed to initialize OpenGL context\n");
+            std::cerr << "Failed to initialize OpenGL context" << std::endl;
             return;
         }
+        gl_inited = true;
+        std::cout << "OpenGL version: " << GLAD_VERSION_MAJOR(version) 
+                  << "." << GLAD_VERSION_MINOR(version) << std::endl;
     }
 
     windowStart(this);
@@ -87,8 +92,13 @@ bool Window::RenderFrame()
     
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+
+    window_render.RenderFrame();
+
     glfwSwapBuffers(gl_window);
     glfwPollEvents();
+
+    glfwMakeContextCurrent(NULL);
     return true;
 }
 

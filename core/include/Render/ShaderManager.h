@@ -11,6 +11,7 @@ public:
     ~ShaderManager();
 
     static GLuint CreateShader(std::string shaderPath, GLenum shaderType);
+    static GLuint CreateShaderProgram(GLuint vertexShader, GLuint fragmentShader);
 private:
     static std::string ReadShaderFile(std::string shaderPath);
 };

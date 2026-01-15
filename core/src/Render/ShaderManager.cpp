@@ -47,16 +47,12 @@ GLuint ShaderManager::CreateShader(std::string shaderPath, GLenum shaderType)
     
     GLuint shader = glCreateShader(shaderType);
     
-    // Конвертируем строку в C-style строку
     const char* shaderCode = shaderCodeStr.c_str();
     
-    // Устанавливаем исходный код шейдера
     glShaderSource(shader, 1, &shaderCode, NULL);
     
-    // Компилируем шейдер
     glCompileShader(shader);
     
-    // Проверяем ошибки компиляции (сохраняя ваш стиль)
     GLint success;
     GLchar infoLog[512];
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
@@ -72,4 +68,24 @@ GLuint ShaderManager::CreateShader(std::string shaderPath, GLenum shaderType)
     }
     
     return shader;
+}
+
+GLuint ShaderManager::CreateShaderProgram(GLuint vertexShader, GLuint fragmentShader)
+{
+    GLuint shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+
+    GLint success;
+    GLchar infoLog[512];
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    if (!success) {
+        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+    }
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    return shaderProgram;
 }

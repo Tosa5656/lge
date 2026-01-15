@@ -52,6 +52,9 @@ private:
     std::function<void(Window*)> windowAwake;
     std::function<void(Window*)> windowStart;
     std::function<void(Window*)> windowUpdate;
+
+    GLuint shaderProgram;
+    GLuint VBO, VAO;
 };
 
 class WindowManager

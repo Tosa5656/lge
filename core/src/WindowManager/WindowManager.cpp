@@ -66,12 +66,6 @@ void Window::Init()
                   << "." << GLAD_VERSION_MINOR(version) << std::endl;
     }
 
-    int width, height;
-    glfwGetFramebufferSize(gl_window, &width, &height);  
-    glViewport(0, 0, width, height);
-
-    window_render.Init();
-
     windowStart(this);
 
     glfwMakeContextCurrent(NULL);

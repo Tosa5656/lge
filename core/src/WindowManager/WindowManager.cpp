@@ -66,6 +66,8 @@ void Window::Init()
                   << "." << GLAD_VERSION_MINOR(version) << std::endl;
     }
 
+    window_render.Init();
+
     windowStart(this);
 
     glfwMakeContextCurrent(NULL);

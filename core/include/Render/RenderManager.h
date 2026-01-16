@@ -1,8 +1,11 @@
+#pragma once
+
 #include <iostream>
 
 #include "../../../libs/glad/include/glad/gl.h"
 #include "../../../libs/glfw/include/GLFW/glfw3.h"
 #include "ShaderManager.h"
+#include "../Mesh/Mesh.h"
 
 class RenderManager
 {
@@ -17,4 +20,6 @@ public:
 private:
     GLuint shaderProgram;
     GLuint VBO, VAO, IBO;
+
+    Mesh test_mesh = Mesh();
 };

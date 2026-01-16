@@ -1,12 +1,12 @@
 CC=g++
 CCFLAGS=-std=c++20 -Wall -Wextra -O2
-GL_INCLUDE_FLAGS=-Iglad/include -Iglfw/include
+GL_INCLUDE_FLAGS=-Iglad/include -Iglfw/include -Isoil/include
 
 all: lge
 
-lge: libglad libglfw editor.o core-windowmanager.o core-input.o core-filesystemmanager.o core-mesh.o core-rendermanager.o core-shadermanager.o install-resources
+lge: libglad libglfw soil editor.o core-windowmanager.o core-input.o core-filesystemmanager.o core-mesh.o core-rendermanager.o core-shadermanager.o install-resources
 	@mkdir -p bin
-	$(CC) obj/editor.o obj/core-windowmanager.o obj/core-input.o obj/core-filesystemmanager.o obj/core-mesh.o obj/core-rendermanager.o obj/core-shadermanager.o obj/glad.o glfw-build/src/libglfw3.a -o bin/lge -ldl -lm
+	$(CC) obj/editor.o obj/core-windowmanager.o obj/core-input.o obj/core-filesystemmanager.o obj/core-mesh.o obj/core-rendermanager.o obj/core-shadermanager.o obj/glad.o glfw-build/src/libglfw3.a libs/soil/build/lib/libSOIL.a -o bin/lge -lglfw -lSOIL -lGL -lpthread -lXrandr -lXi -ldl
 
 editor.o:
 	$(CC) $(CCFLAGS) $(GL_INCLUDE_FLAGS) -c editor/src/main.cpp -o obj/editor.o
@@ -37,8 +37,14 @@ libglfw:
 	@cmake libs/glfw -B glfw-build
 	@cmake --build glfw-build
 
+soil:
+	@cd libs/soil && ./configure && make
+
 install-resources: lge
 	@cp -r resources bin/
+
+install-soil: soil
+	@cd libs/soil && sudo make install
 
 clean:
 	@rm -rf bin obj

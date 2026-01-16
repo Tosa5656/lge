@@ -36,8 +36,15 @@ void RenderManager::Init()
         0, 1, 2,
         0, 2, 3
     };
+
+    std::vector<GLfloat> texpos = {
+        1.0f, 1.0f,
+        1.0f, 0.0f,
+        0.0f, 0.0f,
+        0.0f, 1.0f
+    };
     
-    test_mesh = Mesh(vertices, colors, indices);
+    test_mesh = Mesh(vertices, colors, indices, texpos);
     test_mesh.Init();
 }
 

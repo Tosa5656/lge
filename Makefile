@@ -4,9 +4,9 @@ GL_INCLUDE_FLAGS=-Iglad/include -Iglfw/include
 
 all: lge
 
-lge: libglad libglfw editor.o core-windowmanager.o core-input.o core-filesystemmanager.o
+lge: libglad libglfw editor.o core-windowmanager.o core-input.o core-filesystemmanager.o core-mesh.o core-rendermanager.o core-shadermanager.o install-resources
 	@mkdir -p bin
-	$(CC) obj/editor.o obj/core-windowmanager.o obj/core-input.o obj/core-filesystemmanager.o obj/glad.o glfw-build/src/libglfw3.a -o bin/lge -ldl -lm
+	$(CC) obj/editor.o obj/core-windowmanager.o obj/core-input.o obj/core-filesystemmanager.o obj/core-mesh.o obj/core-rendermanager.o obj/core-shadermanager.o obj/glad.o glfw-build/src/libglfw3.a -o bin/lge -ldl -lm
 
 editor.o:
 	$(CC) $(CCFLAGS) $(GL_INCLUDE_FLAGS) -c editor/src/main.cpp -o obj/editor.o
@@ -19,6 +19,15 @@ core-input.o:
 
 core-filesystemmanager.o:
 	$(CC) $(CCFLAGS) -c core/src/Utils/FileSystemManager.cpp -o obj/core-filesystemmanager.o
+
+core-rendermanager.o:
+	$(CC) $(CCFLAGS) -c core/src/Render/RenderManager.cpp -o obj/core-rendermanager.o
+
+core-shadermanager.o:
+	$(CC) $(CCFLAGS) -c core/src/Render/ShaderManager.cpp -o obj/core-shadermanager.o
+
+core-mesh.o:
+	$(CC) $(CCFLAGS) -c core/src/Mesh/Mesh.cpp -o obj/core-mesh.o
 
 libglad:
 	@mkdir -p obj

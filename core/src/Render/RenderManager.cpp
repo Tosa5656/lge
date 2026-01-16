@@ -21,17 +21,22 @@ void RenderManager::Init()
     std::vector<GLfloat> vertices = {
         -0.5f, -0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f  
+         0.5f,  0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f
     };
     
-    test_mesh = Mesh(vertices);
+    std::vector<GLuint> indices = {
+        0, 1, 2,
+        0, 2, 3
+    };
+    
+    test_mesh = Mesh(vertices, indices);
     test_mesh.Init();
 }
 
 void RenderManager::Cleanup()
 {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    
 }
 
 void RenderManager::RenderFrame()

@@ -8,14 +8,15 @@ class Mesh
 {
 public:
     Mesh();
-    Mesh(std::vector<GLfloat>& vertices);
+    Mesh(std::vector<GLfloat>& vertices, std::vector<GLuint>& indices);
     ~Mesh();
 
     void Init();
 
     void Draw();
 private:
-    GLuint VAO, VBO, EBO;
+    GLuint VAO, VBO, IBO;
     std::vector<GLfloat> mesh_vertices;
+    std::vector<GLuint> mesh_indices;
     size_t mesh_vertexCount = 0;
 };

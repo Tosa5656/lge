@@ -24,13 +24,20 @@ void RenderManager::Init()
          0.5f,  0.5f, 0.0f,
         -0.5f,  0.5f, 0.0f
     };
+
+    std::vector<GLfloat> colors = {
+        0.0f,  0.5f, 0.0f,
+        0.0f,  0.5f, 0.0f,
+        0.0f,  0.5f, 0.0f,
+        0.0f,  0.5f, 0.0f
+    };
     
     std::vector<GLuint> indices = {
         0, 1, 2,
         0, 2, 3
     };
     
-    test_mesh = Mesh(vertices, indices);
+    test_mesh = Mesh(vertices, colors, indices);
     test_mesh.Init();
 }
 

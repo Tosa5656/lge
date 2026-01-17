@@ -51,12 +51,11 @@ void Mesh::Init()
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO_texpos);
     glBufferData(GL_ARRAY_BUFFER, mesh_texpos.size() * sizeof(GLfloat), mesh_texpos.data(),  GL_STATIC_DRAW);
-    
-    glVertexAttribPointer(2, 2, GL_FLOAT,GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     glBindVertexArray(0);
 
@@ -64,15 +63,25 @@ void Mesh::Init()
     glBindTexture(GL_TEXTURE_2D, mesh_texture);
 
     int width, height;
-    unsigned char* image = SOIL_load_image("container.jpg", &width, &height, 0, SOIL_LOAD_RGB); 
+    unsigned char* image = SOIL_load_image("face.png", &width, &height, 0, SOIL_LOAD_RGB);
+    if (!image) {
+        std::cout << "ERROR::TEXTURE::LOADING_FAILED: container.jpg" << std::endl;
+        return;
+    }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
     glGenerateMipmap(GL_TEXTURE_2D);
     SOIL_free_image_data(image);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Mesh::Draw()
 {
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, mesh_texture);
     glBindVertexArray(VAO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);

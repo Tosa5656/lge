@@ -26,10 +26,10 @@ void RenderManager::Init()
     };
 
     std::vector<GLfloat> colors = {
-        0.0f,  0.5f, 0.0f,
-        0.0f,  0.5f, 0.0f,
-        0.0f,  0.5f, 0.0f,
-        0.0f,  0.5f, 0.0f
+        1.0f,  1.0f, 1.0f,
+        1.0f,  1.0f, 1.0f,
+        1.0f,  1.0f, 1.0f,
+        1.0f,  1.0f, 1.0f
     };
     
     std::vector<GLuint> indices = {
@@ -38,10 +38,10 @@ void RenderManager::Init()
     };
 
     std::vector<GLfloat> texpos = {
+        0.0f, 1.0f,
         1.0f, 1.0f,
         1.0f, 0.0f,
-        0.0f, 0.0f,
-        0.0f, 1.0f
+        0.0f, 0.0f
     };
     
     test_mesh = Mesh(vertices, colors, indices, texpos);
@@ -56,5 +56,8 @@ void RenderManager::Cleanup()
 void RenderManager::RenderFrame()
 {
     glUseProgram(shaderProgram);
+    
+    glUniform1i(glGetUniformLocation(shaderProgram, "ourTexture"), 0);
+
     test_mesh.Draw();
 }

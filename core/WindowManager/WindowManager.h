@@ -3,11 +3,11 @@
 #include <algorithm>
 #include <functional>
 
-#include "../../../libs/glad/include/glad/gl.h"
-#include "../../../libs/glfw/include/GLFW/glfw3.h"
-#include "../Utils/Vectors.h"
-#include "../Utils/Input.h"
-#include "../Render/RenderManager.h"
+#include <glad/gl.h>
+#include <GLFW/glfw3.h>
+#include <Utils/Vectors.h>
+#include <Utils/Input.h>
+#include "Render/RenderManager.h"
 
 using namespace lmt;
 

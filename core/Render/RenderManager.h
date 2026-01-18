@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-#include "../../../libs/glad/include/glad/gl.h"
-#include "../../../libs/glfw/include/GLFW/glfw3.h"
+#include <glad/gl.h>
+#include <GLFW/glfw3.h>
 #include "ShaderManager.h"
-#include "../Mesh/Mesh.h"
+#include "Mesh.h"
 
 class RenderManager
 {

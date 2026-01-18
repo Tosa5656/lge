@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "../../../libs/glad/include/glad/gl.h"
+#include <glad/gl.h>
 
 class ShaderManager
 {

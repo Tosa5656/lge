@@ -1,4 +1,4 @@
-#include "../../include/Utils/Input.h"
+#include "Utils/Input.h"
 
 InputManager::InputManager()
 {

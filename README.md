@@ -17,3 +17,4 @@ Realesed functions:
 - Mesh
 - Graphics support(VAO, VBO_pos, VBO_col, IBO)
 - FileSystem Manager
+- Texture support

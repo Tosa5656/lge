@@ -1,4 +1,4 @@
-#include "../../include/Render/ShaderManager.h"
+#include "Render/ShaderManager.h"
 
 ShaderManager::ShaderManager()
 {

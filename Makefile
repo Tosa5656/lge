@@ -53,3 +53,4 @@ install-soil: soil
 clean:
 	@rm -rf bin obj
 	@rm -rf glfw-build
+	@cd libs/soil && make clean

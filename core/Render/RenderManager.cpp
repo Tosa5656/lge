@@ -1,4 +1,4 @@
-#include "../../include/Render/RenderManager.h"
+#include "Render/RenderManager.h"
 
 RenderManager::RenderManager()
 {
@@ -44,7 +44,7 @@ void RenderManager::Init()
         0.0f, 0.0f
     };
     
-    test_mesh = Mesh(vertices, colors, indices, texpos);
+    test_mesh = Mesh(shaderProgram, vertices, colors, indices, texpos);
     test_mesh.Init();
 }
 
@@ -56,8 +56,6 @@ void RenderManager::Cleanup()
 void RenderManager::RenderFrame()
 {
     glUseProgram(shaderProgram);
-    
-    glUniform1i(glGetUniformLocation(shaderProgram, "ourTexture"), 0);
 
     test_mesh.Draw();
 }

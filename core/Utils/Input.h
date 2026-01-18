@@ -1,7 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 
-#include "../../../libs/glfw/include/GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 #include "Vectors.h"
 
 class InputManager

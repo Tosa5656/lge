@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "../../core/include/WindowManager/WindowManager.h"
-#include "../../core/include/Utils/Vectors.h"
-#include "../../core/include/Utils/FileSystemManager.h"
+#include "WindowManager/WindowManager.h"
+#include "Utils/Vectors.h"
+#include "Utils/FileSystemManager.h"
 
 void Awake(Window* window)
 {

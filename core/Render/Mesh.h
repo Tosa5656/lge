@@ -2,14 +2,15 @@
 #include <vector>
 #include <cstddef>
 
-#include "../../../libs/glad/include/glad/gl.h"
-#include "../../../libs/glfw/include/GLFW/glfw3.h"
-#include "../../../libs/soil/include/SOIL/SOIL.h"
+#include <glad/gl.h>
+#include <GLFW/glfw3.h>
+#include <Render/Texture.h>
+
 class Mesh
 {
 public:
     Mesh();
-    Mesh(std::vector<GLfloat>& vertices, std::vector<GLfloat>& colors, std::vector<GLuint>& indices, std::vector<GLfloat>& texpos);
+    Mesh(GLuint shaderProgram, std::vector<GLfloat>& vertices, std::vector<GLfloat>& colors, std::vector<GLuint>& indices, std::vector<GLfloat>& texpos);
     ~Mesh();
 
     void Init();
@@ -28,5 +29,6 @@ private:
     std::vector<GLfloat> mesh_texpos;
     size_t mesh_vertexCount = 0;
 
-    GLuint mesh_texture;
+    GLuint mesh_shaderProgram;
+    Texture mesh_texture;
 };

@@ -1,12 +1,14 @@
-#include "../../include/Mesh/Mesh.h"
+#include "Render/Mesh.h"
 
 Mesh::Mesh()
 {
 
 }
 
-Mesh::Mesh(std::vector<GLfloat>& vertices, std::vector<GLfloat>& colors, std::vector<GLuint>& indices, std::vector<GLfloat>& texpos)
+Mesh::Mesh(GLuint shaderProgram, std::vector<GLfloat>& vertices, std::vector<GLfloat>& colors, std::vector<GLuint>& indices, std::vector<GLfloat>& texpos)
 {
+    mesh_shaderProgram = shaderProgram;
+
     mesh_vertices = vertices;
     mesh_vertexCount = vertices.size() / 3;
 
@@ -59,34 +61,21 @@ void Mesh::Init()
 
     glBindVertexArray(0);
 
-    glGenTextures(1, &mesh_texture);
-    glBindTexture(GL_TEXTURE_2D, mesh_texture);
-
-    int width, height;
-    unsigned char* image = SOIL_load_image("face.png", &width, &height, 0, SOIL_LOAD_RGB);
-    if (!image) {
-        std::cout << "ERROR::TEXTURE::LOADING_FAILED: container.jpg" << std::endl;
-        return;
-    }
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    SOIL_free_image_data(image);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    mesh_texture = Texture("container.jpg");
+    mesh_texture.Init();
 }
 
 void Mesh::Draw()
 {
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, mesh_texture);
+    glUniform1i(glGetUniformLocation(mesh_shaderProgram, "ourTexture"), 0);
+
+    mesh_texture.Enable();
+
     glBindVertexArray(VAO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     glDrawElements(GL_TRIANGLES, mesh_indices.size(), GL_UNSIGNED_INT, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    glBindTexture(GL_TEXTURE_2D, 0);
+
+    mesh_texture.Disable();
 }

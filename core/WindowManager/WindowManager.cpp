@@ -62,6 +62,7 @@ void Window::Init()
             return;
         }
         gl_inited = true;
+        glEnable(GL_DEPTH_TEST);
         std::cout << "OpenGL version: " << GLAD_VERSION_MAJOR(version) 
                   << "." << GLAD_VERSION_MINOR(version) << std::endl;
     }
@@ -93,7 +94,7 @@ bool Window::RenderFrame()
     glfwMakeContextCurrent(gl_window);
     
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     window_render.RenderFrame();
 

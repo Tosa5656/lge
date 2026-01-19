@@ -61,15 +61,35 @@ void Mesh::Init()
 
     glBindVertexArray(0);
 
-    mesh_texture = Texture("container.jpg");
-    mesh_texture.Init();
+    //mesh_texture = Texture("container.jpg");
+    //mesh_texture.Init();
+
+    mesh_model = glm::mat4(1.0f);
+    mesh_view = glm::mat4(1.0f);
+    mesh_projection = glm::mat4(1.0f);
+
+    mesh_model = glm::rotate(mesh_model, glm::radians(-30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    mesh_model = glm::rotate(mesh_model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+    mesh_view = glm::translate(mesh_view, glm::vec3(0.0f, 0.0f, -5.0f));
+
+    mesh_projection = glm::perspective(glm::radians(45.0f), 1920.0f / 1080.0f, 0.1f, 100.0f);
 }
 
 void Mesh::Draw()
 {
-    glUniform1i(glGetUniformLocation(mesh_shaderProgram, "ourTexture"), 0);
+    //glUniform1i(glGetUniformLocation(mesh_shaderProgram, "ourTexture"), 0);
 
-    mesh_texture.Enable();
+    GLint modelLoc = glGetUniformLocation(mesh_shaderProgram, "model");
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(mesh_model));
+
+    GLint viewLoc = glGetUniformLocation(mesh_shaderProgram, "view");
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(mesh_view));
+
+    GLint projectionLoc = glGetUniformLocation(mesh_shaderProgram, "projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(mesh_projection));
+
+    //mesh_texture.Enable();
 
     glBindVertexArray(VAO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
@@ -77,5 +97,5 @@ void Mesh::Draw()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    mesh_texture.Disable();
+    //mesh_texture.Disable();
 }

@@ -4,6 +4,10 @@
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <Render/Texture.h>
 
 class Mesh
@@ -31,4 +35,8 @@ private:
 
     GLuint mesh_shaderProgram;
     Texture mesh_texture;
+
+    glm::mat4 mesh_model;
+    glm::mat4 mesh_view;
+    glm::mat4 mesh_projection;
 };

@@ -1,6 +1,6 @@
 CC=g++
 CCFLAGS=-std=c++20 -Wall -Wextra -O2
-GL_INCLUDE_FLAGS=-Ilibs/glad/include -Ilibs/glfw/include -Ilibs/soil/include
+GL_INCLUDE_FLAGS=-Ilibs/glad/include -Ilibs/glfw/include -Ilibs/soil/include -Ilibs/glm/glm
 CORE_INCLUDE_FLAGS=-Icore
 
 all: lge
